@@ -96,10 +96,21 @@ _ADE20K_INFORMATION = DatasetDescriptor(
     ignore_label=0,
 )
 
+_PITCH_SEG_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': 165,  # num of samples in images/training
+        'trainval':29,
+        'val': 15,  # num of samples in images/validation
+    },
+    num_classes=2,
+    ignore_label=254,
+)
+
 _DATASETS_INFORMATION = {
     'cityscapes': _CITYSCAPES_INFORMATION,
     'pascal_voc_seg': _PASCAL_VOC_SEG_INFORMATION,
     'ade20k': _ADE20K_INFORMATION,
+    'pitch_seg': _PITCH_SEG_INFORMATION
 }
 
 # Default file pattern of TFRecord of TensorFlow Example.
@@ -292,7 +303,7 @@ class Dataset(object):
         max_scale_factor=self.max_scale_factor,
         scale_factor_step_size=self.scale_factor_step_size,
         ignore_label=self.ignore_label,
-        is_training=self.is_training,
+        is_training=True,
         model_variant=self.model_variant)
 
     sample[common.IMAGE] = image

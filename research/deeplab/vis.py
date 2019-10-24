@@ -21,6 +21,11 @@ import os.path
 import time
 import numpy as np
 import tensorflow as tf
+from keras.backend.tensorflow_backend import set_session
+config = tf.ConfigProto()
+config.gpu_options.per_process_gpu_memory_fraction = 0.4
+config.gpu_options.allow_growth = True
+set_session(tf.Session(config=config))
 from deeplab import common
 from deeplab import model
 from deeplab.datasets import data_generator
@@ -72,7 +77,7 @@ flags.DEFINE_integer(
 
 # Dataset settings.
 
-flags.DEFINE_string('dataset', 'pascal_voc_seg',
+flags.DEFINE_string('dataset', 'pitch_seg',
                     'Name of the segmentation dataset.')
 
 flags.DEFINE_string('vis_split', 'val',
